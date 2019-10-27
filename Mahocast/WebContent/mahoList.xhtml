@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<title>Mahocast List Book</title>
+	<style type="text/css">
+.tableUpdated {
+	width: 90% !important;
+	margin: 17px 58px 0 !important;
+}
+</style>
+</h:head>
+<h:body>
+	<center>
+		<h2>
+			<h:outputText value="Mahocast List Book" />
+		</h2>
+	</center>
+	<h:form id="listForm">
+		<div style="width: 90%">
+			<h:dataTable border="2" cellspacing="1" cellpadding="1" value="#{mahoBean.selectMahoList()}" var="maho"
+				styleClass="table table-striped table-bordered tableUpdated">
+				<h:column>
+				<c:facet name="header">ID</c:facet>
+					<h:outputText value="#{maho.id}" />
+				</h:column>
+				<h:column>
+				<c:facet name="header">Name</c:facet>
+					<h:outputText value="#{maho.name}" />
+				</h:column>
+				<h:column>
+				<c:facet name="header"></c:facet>
+					<h:commandButton action="#{mahoBean.deleteSchoolById(maho.id)}"
+						value="Delete" styleClass="btn btn-danger" />
+				</h:column>
+			</h:dataTable>
+			<div align="right">
+			<table class ="tableUpdated no-bordered">
+				<tr><td rowspan="2"></td><td><h:commandButton action="newMaho.xhtml?faces-redirect=true"
+					value="Add" styleClass="btn btn-success btn" /><h:commandButton action="#{mahoBean.editSchoolDetailsById()}"
+					value="Update" styleClass="btn btn-primary">
+					<f:param name="selectedSchoolId" value="#{maho.id}" />
+				</h:commandButton></td></tr>
+				</table>
+			</div>
+		</div>
+	</h:form>
+
+</h:body>
+</html>
